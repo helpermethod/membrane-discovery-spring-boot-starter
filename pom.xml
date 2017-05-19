@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.predic8</groupId>
-    <artifactId>membrane-eureka-spring-boot-starter</artifactId>
+    <artifactId>membrane-discovery-spring-boot-starter</artifactId>
     <version>0.6.0</version>
     <packaging>jar</packaging>
 
@@ -15,6 +15,13 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring-cloud.version>Dalston.RELEASE</spring-cloud.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -30,13 +37,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <groupId>com.predic8</groupId>
+            <artifactId>membrane-spring-boot-starter</artifactId>
+            <version>0.6.0</version>
         </dependency>
         <dependency>
-            <groupId>com.predic8</groupId>
-            <artifactId>membrane-spring-boot-commons</artifactId>
-            <version>0.6.0</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-commons</artifactId>
         </dependency>
     </dependencies>
 </project>
