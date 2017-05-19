@@ -20,12 +20,12 @@ public class DiscoveryInterceptor extends AbstractInterceptor {
 
     @Override
     public Outcome handleRequest(Exchange exc) throws Exception {
-        exc.getDestinations().replaceAll(this::resolveDestination);
+        exc.getDestinations().replaceAll(this::resolve);
 
         return Outcome.CONTINUE;
     }
 
-    private String resolveDestination(String destination) {
+    private String resolve(String destination) {
         URI uri = URI.create(destination);
 
         if (!uri.getScheme().matches("discovery")) {
