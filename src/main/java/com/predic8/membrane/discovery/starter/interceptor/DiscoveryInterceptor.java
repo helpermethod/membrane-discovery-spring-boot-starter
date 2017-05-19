@@ -3,19 +3,15 @@ package com.predic8.membrane.discovery.starter.interceptor;
 import com.predic8.membrane.core.exchange.Exchange;
 import com.predic8.membrane.core.interceptor.AbstractInterceptor;
 import com.predic8.membrane.core.interceptor.Outcome;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
 import java.net.URI;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class DiscoveryInterceptor extends AbstractInterceptor {
-    private final AtomicInteger index = new AtomicInteger();
-    private final DiscoveryClient discoveryClient;
+    private final LoadBalancerClient loadBalancerClient;
 
-    public DiscoveryInterceptor(DiscoveryClient discoveryClient) {
-        this.discoveryClient = discoveryClient;
+    public DiscoveryInterceptor(LoadBalancerClient loadBalancerClient) {
+        this.loadBalancerClient = loadBalancerClient;
     }
 
     @Override
@@ -32,9 +28,6 @@ public class DiscoveryInterceptor extends AbstractInterceptor {
             return uri.toString();
         }
 
-        List<ServiceInstance> instances = discoveryClient.getInstances(uri.getHost());
-        ServiceInstance instance = instances.get(index.getAndIncrement() % instances.size());
-
-        return instance.getUri().toString();
+        return loadBalancerClient.choose(uri.getHost()).getUri().toString();
     }
 }

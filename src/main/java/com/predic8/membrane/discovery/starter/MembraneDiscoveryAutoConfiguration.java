@@ -11,19 +11,19 @@ import com.predic8.membrane.starter.MembraneAutoConfiguration;
 import com.predic8.membrane.starter.servlet.ServletTransport;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Collections;
 
 @Configuration
-@ConditionalOnClass(DiscoveryClient.class)
+@ConditionalOnClass(LoadBalancerClient.class)
 @AutoConfigureBefore(MembraneAutoConfiguration.class)
 public class MembraneDiscoveryAutoConfiguration {
     @Bean
-    public DiscoveryInterceptor discoveryInterceptor(DiscoveryClient discoveryClient) {
-        return new DiscoveryInterceptor(discoveryClient);
+    public DiscoveryInterceptor discoveryInterceptor(LoadBalancerClient loadBalancerClient) {
+        return new DiscoveryInterceptor(loadBalancerClient);
     }
 
     @Bean
