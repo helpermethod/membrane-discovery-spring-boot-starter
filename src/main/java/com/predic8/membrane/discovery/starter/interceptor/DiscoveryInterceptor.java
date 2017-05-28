@@ -28,6 +28,7 @@ public class DiscoveryInterceptor extends AbstractInterceptor {
             return uri.toString();
         }
 
+        // TODO handle null gracefully
         return loadBalancerClient.choose(uri.getHost()).getUri().toString();
     }
 }
