@@ -15,7 +15,7 @@ public class MembraneEurekaApplication {
             .serviceProxy(s -> s
                 .matches(m -> m
                     .method("GET")
-                    .pathPrefix("/jokes"))
+                    .pathPrefix("/jokes/"))
             .target(t -> t.url("discovery://chuck-norris")));
     }
 
