@@ -14,8 +14,9 @@ public class MembraneEurekaApplication {
         return p -> p
             .serviceProxy(s -> s
                 .matches(m -> m
-                    .pathPrefix("/demo"))
-            .target(t -> t.url("discovery://foobar")));
+                    .method("GET")
+                    .pathPrefix("/jokes"))
+            .target(t -> t.url("discovery://chuck-norris")));
     }
 
     public static void main(String[] args) {
