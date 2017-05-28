@@ -1,11 +1,25 @@
 # Membrane Discovery Spring Boot Starter
 
-A Spring Boot Starter that adds additional functionality to [Membrane Spring Boot Starter](https://github.com/membrane/membrane-spring-boot-starter), namely
+A Spring Boot Starter that service discovery and client-side load balancing to [Membrane Spring Boot Starter](https://github.com/membrane/membrane-spring-boot-starter).
 
-## Service Discovery
+## Usage
 
-Services can be refered to using their service name and a special `discovery` protocol.
+```java
+@EnableDiscoveryClient
+@EnableMembrane
+@SpringBootApplication
+public class MembraneEurekaApplication {
+	@Bean
+	public Proxies proxies() {
+		return p -> p
+			.serviceProxy(s -> s
+				.matches(m -> m
+					.pathPrefix("/jokes"))
+				.target(t -> t.url("discovery://chuck-norris")));
+	}
 
-## Client Side Load Balancing
-
-Requests to service name instances are load balanced
+	public static void main(String[] args) {
+		SpringApplication.run(MembraneEurekaApplication.class, args);
+	}
+}
+```
