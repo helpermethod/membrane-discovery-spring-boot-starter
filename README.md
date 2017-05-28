@@ -1,6 +1,6 @@
 # Membrane Discovery Spring Boot Starter
 
-A Spring Boot Starter that service discovery and client-side load balancing to [Membrane Spring Boot Starter](https://github.com/membrane/membrane-spring-boot-starter).
+A Spring Boot Starter that adds service discovery and client-side load balancing to [Membrane Spring Boot Starter](https://github.com/membrane/membrane-spring-boot-starter).
 
 ## Usage
 
