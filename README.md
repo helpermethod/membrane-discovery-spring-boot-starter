@@ -5,21 +5,21 @@ A Spring Boot Starter that adds service discovery and client-side load balancing
 ## Usage
 
 ```java
-@EnableDiscoveryClient
 @EnableMembrane
+@EnableDiscoveryClient
 @SpringBootApplication
 public class MembraneEurekaApplication {
-	@Bean
-	public Proxies proxies() {
-		return p -> p
-			.serviceProxy(s -> s
-				.matches(m -> m
-					.pathPrefix("/jokes"))
-				.target(t -> t.url("discovery://chuck-norris")));
-	}
+    @Bean
+    public Proxies proxies() {
+        return p -> p
+            .serviceProxy(s -> s
+                .matches(m -> m
+                    .pathPrefix("/demo"))
+            .target(t -> t.url("discovery://foobar")));
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(MembraneEurekaApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MembraneEurekaApplication.class, args);
+    }
 }
 ```
